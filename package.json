@@ -23,7 +23,7 @@
     "ndarray": "^1.0.18",
     "ndarray-lup-factorization": "^3.0.2",
     "ndarray-lup-solve": "^1.1.0",
-    "ndarray-scratch": "^1.2.0",
+    "ndarray-scratch": "^1.2.0"
   },
   "devDependencies": {
     "almost-equal": "^1.0.0",
