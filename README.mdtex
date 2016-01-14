@@ -6,7 +6,7 @@
 
 This module uses a Taylor series expansion to compute the coefficients of finite difference schemes. It generates schemes of any derivative and order of accuracy and generates either explicit or implicit schemes.
 
-For example, a scheme with five points treated explicitly and two implicitly would be written as:
+For example, a staggered scheme with four points treated explicitly and two implicitly would be written as:
 
 $$ \alpha f'_{i-1} + f'_i + \beta f'_{i + 1} = a \, f_{i - \frac{3}{2}} + b \, f_{i - \frac{1}{2}} + c \, f_{i + \frac{1}{2}} + d \, f_{i + \frac{3}{2}}$$
 
