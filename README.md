@@ -1,0 +1,80 @@
+# finite-difference-stencil [![Build Status](https://travis-ci.org/scijs/finite-difference-stencil.svg)](https://travis-ci.org/scijs/finite-difference-stencil) [![npm version](https://badge.fury.io/js/finite-difference-stencil.svg)](https://badge.fury.io/js/finite-difference-stencil) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
+> Compute the coefficients of explicit or implicit finite difference schemes
+
+## Introduction
+
+This module uses a Taylor series expansion to compute the coefficients of finite difference schemes. It generates schemes of any derivative and order of accuracy and generates either explicit or implicit schemes.
+
+For example, a scheme with five points treated explicitly and two implicitly would be written as:
+
+<p align="center"><img alt="&bsol;alpha f&apos;&lowbar;&lcub;i-1&rcub; &plus; f&apos;&lowbar;i &plus; &bsol;beta f&apos;&lowbar;&lcub;i &plus; 1&rcub; &equals; a &bsol;&comma; f&lowbar;&lcub;i - &bsol;frac&lcub;3&rcub;&lcub;2&rcub;&rcub; &plus; b &bsol;&comma; f&lowbar;&lcub;i - &bsol;frac&lcub;1&rcub;&lcub;2&rcub;&rcub; &plus; c &bsol;&comma; f&lowbar;&lcub;i &plus; &bsol;frac&lcub;1&rcub;&lcub;2&rcub;&rcub; &plus; d &bsol;&comma; f&lowbar;&lcub;i &plus; &bsol;frac&lcub;3&rcub;&lcub;2&rcub;&rcub;" valign="middle" src="images/alpha-f_i-1-f_i-beta-f_i-1-a-f_i-frac32-b-f_i-e92b84b018.png" width="481" height="38"></p>
+
+In this case, the input would be represented as:
+
+<p align="center">`stencil(1, [-1, 1, -1.5, -0.5, 0.5, 0.5, 1.5], 2)`</p>
+
+where the `1` indicates a first derivative and the final `2` indicates that the first two coordinate points will be treated implicitly. Since the grid spacing is just a scale factor that doesn't affect the solution, it is excluded.
+
+For explicit schemes, the resulting coefficients are multiplied by the respective grid points to compute the derivative.  Making use of implicit Padé-type (compact) schemes requires simultaneous solution for the desired derivative at each grid point. In one dimension, this typically leads to a tridiagonal or pentadiagonal system of equations that must be inverted. In two or more dimensions, it tends to result in a block-diagonal system.
+
+## Examples
+
+```javascript
+// Average two points (zeroth derivative):
+var c = [-1, 1]
+stencil(0, c)
+// => c = [ 0.5, 0.5 ]
+
+
+// Central first derivative:
+var c = [-1, 0, 1]
+stencil(1, c)
+// => c = [ -0.5, 0, 0.5 ]
+
+
+// One-sided first derivative:
+var c = [0, 1, 2]
+stencil(1, c)
+// => c = [ -1.5, 2, -0.5 ]
+
+
+// Sixth order compact second derivative:
+var c = [-2, -1, 1, 2, -2, -1, 0, 1, 2]
+stencil(1, c, 4)
+// => c = [ 0.027777777777778206,
+//          0.44444444444444775,
+//          0.4444444444444405,
+//          0.027777777777777398,
+//         -0.11574074074074253,
+//         -0.7407407407407423,
+//          7.771561172376096e-15,
+//          0.7407407407407378,
+//          0.11574074074073923 ]
+```
+
+## Installation
+
+```bash
+$ npm install finite-difference-stencil
+```
+
+## Usage
+
+##### `require('finite-difference-stencil')(derivative, points[, numImplicit[, A[, P]]])`
+
+Given a list of coordinate points, generates a finite difference stencil giving the specified derivative.
+
+**Arguments:**
+
+- `derivative`: A non-negative integer specifying the desired derivative. If zero, it will generate an interpolation scheme. One and two would indicate the first and second derivatives, respectively.
+- `points`: A list of coordinate points included in the stencil. The first `numImplicit` points are treated as coefficients of implicit terms (left-hand side in the equation above). The remaining points are treated explicitly.
+- `numImplicit` (optional): An integer indicating the number of points treated explicitly. If `numImplicit` is omitted, all points are treated explicitly.
+- `A` (optional): Given array `points` of length n, `A` may be provided as an n&times;n [ndarray](https://github.com/scijs/ndarray) work matrix. If not provided, it will be allocated and freed automatically.
+- `P` (optional): A permutation vector for the matrix inverstion. May simply be an empty `Array`.
+
+## References
+Lele, S. K. (1992). [Compact Finite Difference Schemes with Spectral-like Resolution](http://www.math.colostate.edu/~yzhou/course/math750_fall2009/Lele_1992JCP.pdf). Journal of Computational Physics, 103, 16-42.
+
+## License
+&copy; 2016 Ricky Reusser. MIT License.
