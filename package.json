@@ -4,7 +4,7 @@
   "description": "Compute the coefficients of explicit or implicit finite difference schemes",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "standard && mocha test/*.js"
   },
   "keywords": [
     "finite-difference",
@@ -28,6 +28,7 @@
   "devDependencies": {
     "almost-equal": "^1.0.0",
     "chai": "^3.4.1",
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "standard": "^5.4.1"
   }
 }

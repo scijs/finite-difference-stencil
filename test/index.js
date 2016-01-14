@@ -70,28 +70,28 @@ describe('finite-difference-stencil', function () {
   it('Sixth order fourth derivative', function () {
     var c = [-4, -3, -2, -1, 0, 1, 2, 3, 4]
     assert(stencil(4, c))
-    var expected = [7/240, -2/5, 169/60, -122/15, 91/8, -122/15, 169/60, -2/5, 7/240]
+    var expected = [7 / 240, -2 / 5, 169 / 60, -122 / 15, 91 / 8, -122 / 15, 169 / 60, -2 / 5, 7 / 240]
     assert.vectorAlmostEqual(c, expected)
   })
 
   it('Fourth order third forward difference', function () {
     var c = [0, 1, 2, 3, 4, 5, 6]
     assert(stencil(3, c))
-    var expected = [-49/8, 29, -461/8, 62, -307/8, 13, -15/8]
+    var expected = [-49 / 8, 29, -461 / 8, 62, -307 / 8, 13, -15 / 8]
     assert.vectorAlmostEqual(c, expected)
   })
 
   it('Sixth order compact second derivative (Lele Eq. (2.2.7))', function () {
     var c = [-1, 1, -2, -1, 0, 1, 2]
     assert(stencil(2, c, 2))
-    var expected = [2/11, 2/11, 3/44, 12/11, -51/22, 12/11, 3/44]
+    var expected = [2 / 11, 2 / 11, 3 / 44, 12 / 11, -51 / 22, 12 / 11, 3 / 44]
     assert.vectorAlmostEqual(c, expected)
   })
 
   it('Eighth order compact first derivative (Lele Eq. 2.1.12))', function () {
     var c = [-2, -1, 1, 2, -2, -1, 0, 1, 2]
     assert(stencil(1, c, 4))
-    var expected = [1/36, 4/9, 4/9, 1/36, -25/216, -20/27, 0, 20/27, 25/216]
+    var expected = [1 / 36, 4 / 9, 4 / 9, 1 / 36, -25 / 216, -20 / 27, 0, 20 / 27, 25 / 216]
     assert.vectorAlmostEqual(c, expected)
   })
 })

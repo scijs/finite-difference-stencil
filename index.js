@@ -20,8 +20,7 @@ function computeCoefficients (deriv, points, ni, A, P) {
 
   var allocateA = !A
   var n = points.length
-  var ni = ni || 0
-  var ne = n - ni
+  ni = ni || 0
 
   if (allocateA) {
     A = pool.zeros([n, n])
@@ -32,7 +31,7 @@ function computeCoefficients (deriv, points, ni, A, P) {
 
   for (j = 0; j < ni; j++) {
     for (i = deriv, x = 1, fac = 1; i < n; i++, x *= points[j], fac *= (i - deriv)) {
-      A.set(i, j, - x / fac)
+      A.set(i, j, -x / fac)
     }
   }
 
