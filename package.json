@@ -1,6 +1,6 @@
 {
   "name": "finite-difference-stencil",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compute the coefficients of explicit or implicit finite difference schemes",
   "main": "index.js",
   "scripts": {
