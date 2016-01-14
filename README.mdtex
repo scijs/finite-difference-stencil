@@ -12,7 +12,7 @@ $$ \alpha f'_{i-1} + f'_i + \beta f'_{i + 1} = a \, f_{i - \frac{3}{2}} + b \, f
 
 In this case, the input would be represented as:
 
-<p align="center">`stencil(1, [-1, 1, -1.5, -0.5, 0.5, 0.5, 1.5], 2)`</p>
+<p align="center"><code>stencil(1, [-1, 1, -1.5, -0.5, 0.5, 0.5, 1.5], 2)</code></p>
 
 where the `1` indicates a first derivative and the final `2` indicates that the first two coordinate points will be treated implicitly. Since the grid spacing is just a scale factor that doesn't affect the solution, it is excluded.
 
