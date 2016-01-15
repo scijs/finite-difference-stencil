@@ -12,7 +12,7 @@ For example, a staggered scheme with four points treated explicitly and two impl
 
 In this case, the input would be represented as:
 
-<p align="center"><code>stencil(1, [-1, 1, -1.5, -0.5, 0.5, 0.5, 1.5], 2)</code></p>
+<p align="center"><code>stencil(1, [-1, 1, -1.5, -0.5, 0.5, 1.5], 2)</code></p>
 
 where the `1` indicates a first derivative and the final `2` indicates that the first two coordinate points will be treated implicitly. Since the grid spacing is just a scale factor that doesn't affect the solution, it is excluded.
 
