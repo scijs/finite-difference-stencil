@@ -41,7 +41,7 @@ stencil(1, c)
 
 // Sixth order compact second derivative:
 var c = [-2, -1, 1, 2, -2, -1, 0, 1, 2]
-stencil(1, c, 4)
+stencil(2, c, 4)
 // => c = [ 0.027777777777778206,
 //          0.44444444444444775,
 //          0.4444444444444405,
